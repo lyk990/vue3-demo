@@ -1,4 +1,4 @@
-import { reactive } from "../reactive";
+import { reactive, isReadonly } from "../reactive";
 
 describe("effect", () => {
   it("happy path", () => {
