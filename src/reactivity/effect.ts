@@ -2,7 +2,7 @@ import { extend } from "./../shared/index";
 
 let activeEffect;
 let shouldTrack;
-class ReactiveEffect {
+export class ReactiveEffect {
   private _fn: any;
   deps = [];
   active = true;
@@ -10,6 +10,7 @@ class ReactiveEffect {
   public scheduler: Function | undefined;
   constructor(fn, scheduler?: Function) {
     this._fn = fn;
+    this.scheduler = scheduler;
   }
   run() {
     // 1.会收集依赖
