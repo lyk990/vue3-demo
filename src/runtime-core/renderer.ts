@@ -9,12 +9,14 @@ export function render(vnode, container) {
 
 function patch(vnode, container) {
   // 去处理组件
-  // 判断是不是element类型
+  //  TODO 判断是不是element类型
+  // processELement()
   processComponent(vnode, container);
 }
 function processComponent(vnode: any, container: any) {
   mountComponent(vnode, container);
 }
+
 
 function mountComponent(vnode: any, container: any) {
   const instance = createComponentInstance(vnode);
