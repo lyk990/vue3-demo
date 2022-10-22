@@ -6,16 +6,16 @@ describe("computed", () => {
     // ref
     // .value
     // 1.缓存 
-    const value = reactive({
-      foo: 1,
+    const user = reactive({
+      age: 1,
     });
 
-    const getter = computed(() => {
-      return value.foo;
+    const age = computed(() => {
+      return user.age;
     });
 
-    value.foo = 2;
-    expect(getter.value).toBe(2);
+    // user.age = 2;
+    expect(age.value).toBe(1);
   });
 
   it("should compute lazily", () => {
@@ -38,15 +38,15 @@ describe("computed", () => {
     expect(getter).toHaveBeenCalledTimes(1);
 
     // // should not compute until needed
-    value.foo = 2;
+    value.foo = 2; // 触发trigger
     expect(getter).toHaveBeenCalledTimes(1);
 
     // // now it should compute
     expect(cValue.value).toBe(2);
-    // expect(getter).toHaveBeenCalledTimes(2);
+    expect(getter).toHaveBeenCalledTimes(2);
 
     // // should not compute again
-    // cValue.value;
-    // expect(getter).toHaveBeenCalledTimes(2);
+    cValue.value;
+    expect(getter).toHaveBeenCalledTimes(2);
   });
 });
