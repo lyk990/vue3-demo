@@ -1,7 +1,9 @@
 import { h } from "../../lib/guide-mini-vue.esm.js";
 
+window.self = null;
 export const App = {
   render() {
+    window.self = this;
     return h(
       "div",
       {
@@ -9,15 +11,15 @@ export const App = {
         class: ["red", "hard"],
       },
       // string
-      // "hi" + "this.msg"
+      "hi" + this.msg
       // Array
-      [h("p", { class: "red" }, "hi"), h("p", { class: "blue" }, "mini-vue")]
+      // [h("p", { class: "red" }, "hi"), h("p", { class: "blue" }, "mini-vue")]
     );
   },
   setup() {
     // composition api
     return {
-      msg: "mini-vue",
+      msg: "mini-vue111",
     };
   },
 };
