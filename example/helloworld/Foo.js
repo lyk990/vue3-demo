@@ -4,7 +4,6 @@ export const Foo = {
   setup(props) {
     // props.count
     // shallow readonly 
-    console.log(props);
     props.count++;
   },
   render() {
