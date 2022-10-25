@@ -4,8 +4,12 @@ import { Fragment, Text } from "./vnode";
 import { createAppAPI } from "./createApp";
 
 export function createRenderer(options) {
-  const { createElement, patchProp, insert } = options;
-  
+  const {
+    createElement: hostCreateElement,
+    patchProp: hostPatchProp,
+    insert: hostInsert,
+  } = options;
+
   function render(vnode, container) {
     // 调用patch方法
     // 主要就是用来对比两次虚拟dom的方法，做的主要就是diff的操作
@@ -96,8 +100,9 @@ export function createRenderer(options) {
     // vnode -> element -> mountElement
     patch(subTree, container, instance);
     initialVNode.el = subTree.el;
-    return {
-      createApp: createAppAPI(render)
-    }
   }
+
+  return {
+    createApp: createAppAPI(render),
+  };
 }
