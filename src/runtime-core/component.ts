@@ -3,9 +3,9 @@ import { initProps } from "./componentProps";
 import { shallowReadonly } from "../reactivity/reactive";
 import { emit } from "./componentEmit";
 import { initSlots } from "./componentSlots";
+import { proxyRefs } from "../reactivity";
 
 export function createComponentInstance(vnode, parent) {
-  console.log("createComponentInstance", parent);
   const component = {
     vnode,
     type: vnode.type,
@@ -14,6 +14,8 @@ export function createComponentInstance(vnode, parent) {
     slots: {},
     provides: parent ? parent.provides : {},
     parent,
+    isMounted: false,
+    subTree: {},
     emit: () => {},
   };
   component.emit = emit.bind(null, component) as any;
@@ -48,7 +50,7 @@ function handleSetupResult(instance, setupResult: any) {
   // function object
   // TODO function
   if (typeof setupResult === "object") {
-    instance.setupState = setupResult;
+    instance.setupState = proxyRefs(setupResult);
   }
   // 保证组件一定是有值的
   finishComponentSetup(instance);

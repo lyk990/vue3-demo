@@ -1,6 +1,5 @@
 import { createRenderer } from "../../lib/guide-mini-vue.esm.js";
 import { App } from "./App.js";
-console.log(PIXI);
 
 const game = new PIXI.Application({
   width: 500,
