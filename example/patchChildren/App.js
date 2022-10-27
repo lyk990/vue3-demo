@@ -17,9 +17,9 @@ export default {
       // 老的是text 新的是text
       // h(TextToText),
       // 老的是text 新的是array
-      h(TextToArray),
+      // h(TextToArray),
       // 老的是array 新的是array
-      // h(ArrayToArray),
+      h(ArrayToArray),
     ]);
   },
 };
