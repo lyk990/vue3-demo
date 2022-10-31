@@ -6,6 +6,7 @@ export const App = {
     const count = ref(0);
 
     const onClick = () => {
+      console.log(count.value)
       count.value++;
     };
 

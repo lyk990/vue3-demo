@@ -363,7 +363,6 @@ export function createRenderer(options) {
       },
       {
         scheduler() {
-          console.log("update-scheduler");
           queueJobs(instance.update);
         },
       }
