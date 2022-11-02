@@ -21,6 +21,5 @@
   },
   "dependencies": {
     "tslib": "^2.4.0"
-  },
-  "type": "module"
+  }
 }

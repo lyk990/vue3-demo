@@ -50,12 +50,14 @@ export function track(target, key) {
   //   target -> key -> dep
   let depsMap = targetMap.get(target);
   if (!depsMap) {
+    // 初始化， 第一次触发响应式的时候没有收集依赖
     depsMap = new Map();
     targetMap.set(target, depsMap);
   }
 
   let dep = depsMap.get(key);
   if (!dep) {
+    // 初始化， 第一次触发响应式的时候没有收集依赖
     dep = new Set();
     depsMap.set(key, dep);
   }
