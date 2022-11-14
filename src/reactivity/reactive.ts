@@ -33,7 +33,12 @@ export function isReadonly(value) {
 export function isProxy(value) {
   return isReactive(value) || isReadonly(value);
 }
-
+/**
+ * @description: reactive必须是一个对象
+ * @param {any} target
+ * @param {*} baseHandlers
+ * @return {*}
+ */
 function createActiveObject(target: any, baseHandlers) {
   if (!isObject(target)) {
     console.warn(`target ${target} 必须是一个对象`);
