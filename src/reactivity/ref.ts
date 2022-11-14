@@ -24,6 +24,7 @@ class RefImpl {
     if (hasChanged(newValue, this._rawValue)) {
       this._rawValue = newValue;
       this._value = covert(newValue);
+      this._v_isRef = true
       triggerEffects(this.dep);
     }
   }
@@ -49,7 +50,6 @@ export function ref(value) {
 }
 
 export function isRef(ref) {
-  //
   return !!ref._v_isRef;
 }
 
@@ -57,7 +57,11 @@ export function unRef(ref) {
   // 看看是不是一个ref对象
   return isRef(ref) ? ref.value : ref;
 }
-
+/**
+ * @description: 对setup中的return进行处理，在模板语法汇总不需要使用.value 
+ * @param {*} objectWithRefs
+ * @return {*}
+ */
 export function proxyRefs(objectWithRefs) {
   return new Proxy(objectWithRefs, {
     get(target, key) {
