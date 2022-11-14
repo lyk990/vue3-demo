@@ -10,7 +10,7 @@ class RefImpl {
   private _v_isRef = true;
   constructor(value) {
     this._rawValue = value;
-    // 查看value1是否是一个对象
+    // 查看value1是否是一个对象,
     this._value = covert(value);
     this.dep = new Set();
   }
@@ -29,6 +29,11 @@ class RefImpl {
   }
 }
 
+/**
+ * @description: 是对象就变成响应式对象
+ * @param {*} value
+ * @return {*}
+ */
 function covert(value) {
   return isObject(value) ? reactive(value) : value;
 }
