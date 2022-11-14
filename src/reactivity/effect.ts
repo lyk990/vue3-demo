@@ -5,22 +5,23 @@ let shouldTrack;
 export class ReactiveEffect {
   private _fn: any;
   deps = [];
-  active = true;
+  active = true; // 是否激活
   onStop?: () => void;
   public scheduler: Function | undefined;
   constructor(fn, scheduler?: Function) {
-    this._fn = fn;
+    this._fn = fn; // 副作用函数
     this.scheduler = scheduler;
   }
   run() {
     // 1.会收集依赖
     // shouldTrack来做区分
+    // 执行fn，但是不收集依赖
     if (!this.active) {
       return this._fn();
     }
     // 应该收集
-    shouldTrack = true;
-    activeEffect = this;
+    shouldTrack = true; // 赋值给全局
+    activeEffect = this; // 赋值给全局
     const result = this._fn();
     // reset
     shouldTrack = false;
@@ -92,14 +93,17 @@ export function triggerEffects(dep) {
     }
   }
 }
-
+/**
+ * @description: 在响应式数据发生改变的时候触发，例如：watch、computed 
+ * @param {*} fn
+ * @param {any} options  允许指定调度器
+ * @return {*}
+ */
 export function effect(fn, options: any = {}) {
-  //  fn
   const _effect = new ReactiveEffect(fn, options.scheduler);
   Object.assign(_effect, options);
-  // extend
   extend(_effect, options);
-  _effect.run();
+  _effect.run(); // return fn
   const runner: any = _effect.run.bind(_effect);
   runner.effect = _effect;
 
